@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="liferay-sample-lps-37869-ext" basedir="." default="deploy">
+<project name="liferay-sample-verify-ext" basedir="." default="deploy">
 	<import file="../build-common-ext.xml" />
 </project>

@@ -24,7 +24,7 @@ Step 2. Build and package
 
     % ant clean war
 
-This will build "liferay-sample-lps-37869-ext-A.B.C.D.war" in the Liferay Portal plugins SDK dist folder.
+This will build "liferay-sample-verify-ext-A.B.C.D.war" in the Liferay Portal plugins SDK dist folder.
 
 NOTE: You will require JDK 1.6+ and Liferay Portal Plugins SDK.
 
