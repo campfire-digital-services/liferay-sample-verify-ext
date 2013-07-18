@@ -5,7 +5,7 @@
 This project provides a sample solution for the following LPS tickets :
 
 * [LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process](https://issues.liferay.com/browse/LPS-35280 "LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process").
-* [LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name](https://github.com/timtelcik/liferay-sample-lps-37869-ext "LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name").
+* [LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name](https://issues.liferay.com/browse/LPS-37869 "LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name").
 
 
 ## Supported Products
@@ -18,7 +18,7 @@ This project provides a sample solution for the following LPS tickets :
 Step 1. Checkout source from GitHub project to a Liferay Portal Plugins SDK
 
     % cd LIFERAY_PORTAL_PLUGINS_SDK/ext
-    % git clone https://github.com/timtelcik/liferay-sample-lps-37869-ext
+    % git clone https://github.com/permeance/liferay-sample-verify-ext
 
 Step 2. Build and package
 
@@ -33,7 +33,7 @@ NOTE: You will require JDK 1.6+ and Liferay Portal Plugins SDK.
 
 ### Liferay Portal + Apache Tomcat Bundle
 
-* Deploy "liferay-sample-lps-37869-ext-A.B.C.D.war" to "LIFERAY_HOME/deploy" folder.
+* Deploy "liferay-sample-verify-ext-A.B.C.D.war" to "LIFERAY_HOME/deploy" folder.
 * Start Liferay Portal to install EXT plugin.
 * Stop Liferay Portal.
 * Start Liferay Portal again to use EXT plugin.
