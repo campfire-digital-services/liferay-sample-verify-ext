@@ -33,16 +33,18 @@ NOTE: You will require JDK 1.6+ and Liferay Portal Plugins SDK.
 
 ### Portal Properties
 
-* verify.dl.file.name.normalization.enabled. Default value is true.
-* verify.dl.file.name.normalization.max.list.page.size. Default value is 50.
-* layout.import.dl.file.name.normalization.enabled=false Default is true.
+| Property        | Description           | Default  |
+| ------------- |:-------------| :-----:|
+| verify.dl.file.name.normalization.enabled                | Enable DL file name normalization during Verify Document Library process. | true |
+| verify.dl.file.name.normalization.max.list.page.size     | DL file items to normalize in logical "page" of files. | 50 |
+| layout.import.dl.file.name.normalization.enabled | Enable DL file name normalization during LAR import for Document Library files. | true |
 
 
 ### Configure Liferay Portal + Apache Tomcat Bundle
 
 To enable the custom verify suite, add the following properties to file "LIFERAY_HOME/portal-ext.properties" :
 
-{code}
+```
 ##
 ## Verify
 ##
@@ -80,7 +82,7 @@ To enable the custom verify suite, add the following properties to file "LIFERAY
    
    # LPS-37869 - Import Document Library   
    #layout.import.dl.file.name.normalization.enabled=false
-{code}
+```
 
 
 ### Deploy to Liferay Portal + Apache Tomcat Bundle
