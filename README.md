@@ -6,7 +6,7 @@
 
 Liferay Portal 6.1 provides a [data verification process](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/verify) which can be run on startup to fix data integrity problems.
 
-It also provides functions to * [export/import data](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/managing-pages-in-liferay-portal) to/from a Liferay ARchive (LAR) file.
+It also provides functions to [export/import data](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/managing-pages-in-liferay-portal) to/from a Liferay ARchive (LAR) file.
 
 This project provides a sample solution to the following LPS tickets :
 
