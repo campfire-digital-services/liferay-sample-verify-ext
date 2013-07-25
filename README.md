@@ -62,16 +62,17 @@ Add/update the following properties in file "LIFERAY_HOME/portal-ext.properties"
     #verify.frequency=0
 
 
-    #
-    # LPS-37869
-    # https://issues.liferay.com/browse/LPS-37869
-    #
+##
+## Patches
+##
 
     # LPS-37869 - Verify Document Library
+    # https://issues.liferay.com/browse/LPS-37869
     #verify.dl.file.name.normalization.enabled=false
     #verify.dl.file.name.normalization.max.list.page.size=50
    
-    # LPS-37869 - Layout Import Document Library   
+    # LPS-37869 - Layout Import Document Library 
+    # https://issues.liferay.com/browse/LPS-37869  
     #layout.import.dl.file.name.normalization.enabled=false
 ```
 
