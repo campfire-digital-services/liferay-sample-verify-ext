@@ -16,7 +16,7 @@ This project provides a sample solution to the following LPS tickets :
 
 ## Supported Products
 
-* Liferay Portal 6.1 EE GA2 (6.1.20+)
+* Liferay Portal 6.1 CE GA2 (6.1.1+)
 
 
 ## Usage
@@ -130,3 +130,4 @@ NOTE: You will require JDK 1.6+ and Liferay Portal Plugins SDK.
 
 * [Liferay Portal 6.1 - User Guide - Creating sites and managing pages](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/managing-pages-in-liferay-portal "Liferay Portal 6.1 - User Guide - Creating sites and managing pages")
 * [LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name](https://issues.liferay.com/browse/LPS-37869 "LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name").
+
