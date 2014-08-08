@@ -95,11 +95,14 @@ import javax.portlet.PortletPreferences;
 
 
 /**
+ * @deprecated Replaced in LP 6.2.x by com.liferay.portlet.documentlibrary.lar.DLPortletDataHandler
+ *
  * @author Bruno Farache
  * @author Raymond Augé
  * @author Tim Telcik <tim.telcik@permeance.com.au>
  * 
  * @see https://issues.liferay.com/browse/LPS-37869
+ * @see com.liferay.portlet.documentlibrary.lar.DLPortletDataHandler
  */
 public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 

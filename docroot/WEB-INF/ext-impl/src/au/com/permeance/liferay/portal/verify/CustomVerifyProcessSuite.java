@@ -16,12 +16,14 @@
 package au.com.permeance.liferay.portal.verify;
 
 import com.liferay.portal.verify.VerifyAsset;
+import com.liferay.portal.verify.VerifyAuditedModel;
 import com.liferay.portal.verify.VerifyBlogs;
 import com.liferay.portal.verify.VerifyBookmarks;
 import com.liferay.portal.verify.VerifyCalendar;
-import com.liferay.portal.verify.VerifyCounter;
 import com.liferay.portal.verify.VerifyDB2;
+import com.liferay.portal.verify.VerifyDynamicDataMapping;
 import com.liferay.portal.verify.VerifyGroup;
+import com.liferay.portal.verify.VerifyGroupId;
 import com.liferay.portal.verify.VerifyJournal;
 import com.liferay.portal.verify.VerifyLayout;
 import com.liferay.portal.verify.VerifyMessageBoards;
@@ -33,10 +35,10 @@ import com.liferay.portal.verify.VerifyProperties;
 import com.liferay.portal.verify.VerifyResourcePermissions;
 import com.liferay.portal.verify.VerifyRole;
 import com.liferay.portal.verify.VerifySQLServer;
-import com.liferay.portal.verify.VerifySocial;
 import com.liferay.portal.verify.VerifyUUID;
 import com.liferay.portal.verify.VerifyUser;
 import com.liferay.portal.verify.VerifyWiki;
+import com.liferay.portal.verify.VerifyWorkflow;
 
 
 /**
@@ -60,30 +62,32 @@ public class CustomVerifyProcessSuite extends com.liferay.portal.verify.VerifyPr
 		verify(new VerifyOracle());
 		verify(new VerifySQLServer());
 
-		verify(new VerifyCounter());
 		verify(new VerifyUUID());
 
 		verify(new VerifyPermission());
+		verify(new VerifyGroup());
 		verify(new VerifyRole());
 
 		verify(new VerifyAsset());
+		verify(new VerifyAuditedModel());
 		verify(new VerifyBlogs());
 		verify(new VerifyBookmarks());
 		verify(new VerifyCalendar());
-		
+
 		// verify(new VerifyDocumentLibrary());
 		// LPS-35280 / LPS-37869
-		verify(new CustomVerifyDocumentLibrary());
+		verify(new CustomVerifyDocumentLibrary());		
 
-		verify(new VerifyGroup());
+		verify(new VerifyDynamicDataMapping());
+		verify(new VerifyGroupId());
 		verify(new VerifyJournal());
 		verify(new VerifyLayout());
 		verify(new VerifyMessageBoards());
 		verify(new VerifyOrganization());
 		verify(new VerifyResourcePermissions());
-		verify(new VerifySocial());
 		verify(new VerifyUser());
 		verify(new VerifyWiki());
+		verify(new VerifyWorkflow());
 
 		// VerifyBlogsTrackbacks looks at every blog comment to see if it is a
 		// trackback and verifies that the source URL is a valid URL.

@@ -13,5 +13,7 @@ public class PropsKeysExt {
 	public static final String VERIFY_DL_FILE_NAME_NORMALIZATION_ENABLED = "verify.dl.file.name.normalization.enabled";
 	
 	public static final String VERIFY_DL_FILE_NAME_NORMALIZATION_MAX_LIST_PAGE_SIZE = "verify.dl.file.name.normalization.max.list.page.size";
+	
+	public static final String VERIFY_DL_REMOVE_EMPTY_FILE_ENTRIES_ENABLED = "verify.dl.remove.empty.file.entries.enabled";
 
 }

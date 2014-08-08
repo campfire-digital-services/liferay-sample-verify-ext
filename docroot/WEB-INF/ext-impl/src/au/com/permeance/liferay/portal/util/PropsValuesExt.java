@@ -28,10 +28,13 @@ import com.liferay.portal.kernel.util.PropsUtil;
  */
 public class PropsValuesExt {
 	
+	@Deprecated
 	public static boolean LAYOUT_IMPORT_DL_FILE_NAME_NORMALIZATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeysExt.LAYOUT_IMPORT_DL_FILE_NAME_NORMALIZATION_ENABLED),true);
 	
 	public static boolean VERIFY_DL_FILE_NAME_NORMALIZATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeysExt.VERIFY_DL_FILE_NAME_NORMALIZATION_ENABLED),true);
 	
 	public static int VERIFY_DL_FILE_NAME_NORMALIZATION_MAX_LIST_PAGE_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeysExt.VERIFY_DL_FILE_NAME_NORMALIZATION_MAX_LIST_PAGE_SIZE), 50);
+	
+	public static boolean VERIFY_DL_REMOVE_EMPTY_FILE_ENTRIES_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeysExt.VERIFY_DL_REMOVE_EMPTY_FILE_ENTRIES_ENABLED),true);
 
 }

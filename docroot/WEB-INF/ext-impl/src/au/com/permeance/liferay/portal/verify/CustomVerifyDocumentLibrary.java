@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2013 Permeance Technologies
+* Copyright (C) 2014 Permeance Technologies
 *
 * This program is free software: you can redistribute it and/or modify it under the terms of the
 * GNU General Public License as published by the Free Software Foundation, either version 3 of the
@@ -26,6 +26,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
@@ -38,11 +39,11 @@ import java.util.List;
  * Custom Verify Document Library.
  * 
  * This Verify Process implementation extends the default VerifyDocumentLibrary
- * processas follows:
+ * process as follows:
  * o Remove empty file entries (i.e. file entries without a binary asset)
- *   see https://issues.liferay.com/browse/LPS-35280
+ *   See https://issues.liferay.com/browse/LPS-35280
  * o Normalize DL file names
- *   see https://issues.liferay.com/browse/LPS-37869
+ *   See https://issues.liferay.com/browse/LPS-37869
  * 
  * @author Tim Telcik <tim.telcik@permeance.com.au>
  * 
@@ -60,6 +61,8 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 	}
 	
 
+	// LPS-35280	
+	/*
 	@Override
 	protected void doVerify() throws Exception {
 		
@@ -81,20 +84,73 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 		
 		updateAssets();
 	}
+	*/
+
+	// VerifyDocumentLibrary
+	/*
+	@Override
+	protected void doVerify() throws Exception {
+
+		checkDLFileEntryType();
+		checkMimeTypes();
+		checkTitles();
+		removeOrphanedDLFileEntries();
+		updateFileEntryAssets();
+		updateFolderAssets();
+		verifyTree();
+	}
+	*/
+	
+	@Override
+	protected void doVerify() throws Exception {
+
+		// VerifyDocumentLibrary
+		/*
+		checkDLFileEntryType();
+		checkMimeTypes();
+		checkTitles();
+		removeOrphanedDLFileEntries();
+		updateFileEntryAssets();
+		updateFolderAssets();
+		verifyTree();
+		 */
+		
+		// LPS-35280 Check
+		if (PropsValuesExt.VERIFY_DL_REMOVE_EMPTY_FILE_ENTRIES_ENABLED) {
+			removeEmptyDLFileEntries();
+		}
+
+		// Default checks
+		checkDLFileEntryType();
+		checkMimeTypes();
+		checkTitles();
+		removeOrphanedDLFileEntries();
+		
+		// LPS-37869 Check
+		if (PropsValuesExt.VERIFY_DL_FILE_NAME_NORMALIZATION_ENABLED) {
+			normalizeDLFileEntryNames();
+		}
+
+		// Default checks
+		updateFolderAssets();
+		verifyTree();
+	}
 	
 	
 	@Override	
 	protected void checkMimeTypes() throws Exception {
 
 		List<DLFileEntry> dlFileEntries =
-			DLFileEntryLocalServiceUtil.getFileEntriesByMimeType(
-				ContentTypes.APPLICATION_OCTET_STREAM);
-
+				DLFileEntryUtil.findByMimeType(
+					ContentTypes.APPLICATION_OCTET_STREAM);
+		
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Processing " + dlFileEntries.size() + " file entries with " +
-					ContentTypes.APPLICATION_OCTET_STREAM);
+					ContentTypes.APPLICATION_OCTET_STREAM + " MIME type");
 		}
+		
+		int updateCount = 0;
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			
@@ -130,10 +186,12 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 			dlFileVersion.setMimeType(mimeType);
 
 			DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
+			
+			updateCount++;
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Fixed file entries with invalid mime types");
+			_log.debug("Updated " + updateCount + " file entries with invalid MIME types");
 		}
 	}	
 	
@@ -202,14 +260,17 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 	protected void removeEmptyDLFileEntries() throws Exception {
 		
 		List<DLFileEntry> dlFileEntries =
-				DLFileEntryLocalServiceUtil.getFileEntriesByMimeType(
+				DLFileEntryUtil.findByMimeType(
 					ContentTypes.APPLICATION_OCTET_STREAM);
+		
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Scanning " + dlFileEntries.size() + " file entries with " +
-					ContentTypes.APPLICATION_OCTET_STREAM + " for empty entries");
+					ContentTypes.APPLICATION_OCTET_STREAM + " MIME type for empty entries");
 		}
+		
+		int deleteCount = 0;
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			
@@ -220,7 +281,9 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 	                  _log.warn("Removing file entry " + dlFileEntry.getTitle() + " due to missing file : " + fileEntryDetails);
 	               }
 					
-	               DLFileEntryLocalServiceUtil.deleteFileEntry(dlFileEntry.getFileEntryId());					
+	               DLFileEntryLocalServiceUtil.deleteFileEntry(dlFileEntry.getFileEntryId());
+	               
+	               deleteCount++;
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
@@ -231,7 +294,7 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Removed empty file entries");
+			_log.debug("Removed " + deleteCount + " empty file entries");
 		}
 	}	
 	
