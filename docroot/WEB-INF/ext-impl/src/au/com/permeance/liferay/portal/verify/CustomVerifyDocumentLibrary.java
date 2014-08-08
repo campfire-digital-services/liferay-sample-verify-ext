@@ -321,7 +321,7 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 		
 		while (istart < fileEntriesCount) {
 			
-			_log.debug("Processing file entries " + istart + " to " + iend);
+			_log.debug("Processing " + istart + " to " + iend + " of " + fileEntriesCount + " file entries");
 
 			List<DLFileEntry> dlFileEntries =
 					DLFileEntryLocalServiceUtil.getFileEntries( istart, iend );
@@ -338,7 +338,7 @@ public class CustomVerifyDocumentLibrary extends com.liferay.portal.verify.Verif
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.info("Finished normalizing " + totalUpdateCount + " file names");
+			_log.info("Normalized " + totalUpdateCount + " of " + fileEntriesCount + " file entries");
 		}
 	}
 
