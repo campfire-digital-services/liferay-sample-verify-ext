@@ -13,6 +13,7 @@ This project provides a sample solution to the following LPS tickets :
 * [LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process](https://issues.liferay.com/browse/LPS-35280 "LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process").
 * [LPS-37869 - Filename Exception when Importing LAR file with punctuation characters in document file name](https://issues.liferay.com/browse/LPS-37869 "LPS-37869 - Filename Exception when Importing LAR file with punctuation characters in document file name").
 
+
 Project branch 6.2.x provides a sample solution to this LPS ticket:
 * [LPS-35280|https://issues.liferay.com/browse/LPS-35280].
 
@@ -34,12 +35,13 @@ Project master and branch 6.1.x provides a sample solution to these LPS tickets:
 Add/update the following properties in file "LIFERAY_HOME/portal-ext.properties" :
 
 | *Property*        | *Description*  | *Verify Process* | *Default Value* | *Code Branch* |
-| :-------------  |:-------------| :----- | :----- |
+| :-------------  |:-------------| :----- | :----- | :----- |
 | verify.frequency | Data verification frequency. | Verify Suite | 1 (run once) | N/A |
 | verify.dl.file.name.normalization.enabled                | Enable DL file name normalization during Verify Document Library process. | Verify Document Library | true | master/6.1.x/6.2.x |
 | verify.dl.file.name.normalization.max.list.page.size     | DL file items to normalize in logical "page" of files. | Verify Document Library | 50 | master/6.1.x/6.2.x |
 | layout.import.dl.file.name.normalization.enabled | Enable DL file name normalization during LAR import for Document Library files. | Layout Import Document Library | true | master/6.1.x |
 | verify.dl.remove.empty.file.entries.enabled | Enable removal of emptry DL file entries. | Verify Document Library | true | master/6.1.x/6.2.x |
+
 
 ### Sample Portal Properties
 
