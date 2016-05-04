@@ -4,19 +4,16 @@
 
 ## Overview
 
-Liferay Portal 6.1 provides a [data verification process](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/verify) which can be run on startup to fix data integrity problems.
-
-It also provides functions to [export/import data](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/managing-pages-in-liferay-portal) to/from a Liferay ARchive (LAR) file.
+Liferay Portal 6.2 provides a [data verification process](https://github.com/liferay/liferay-portal/blob/6.2.x/portal-impl/src/com/liferay/portal/verify/VerifyProcessSuite.java) which can be run on startup to fix data integrity problems.
 
 This project provides a sample solution to the following LPS tickets :
 
 * [LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process](https://issues.liferay.com/browse/LPS-35280 "LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process").
-* [LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name](https://issues.liferay.com/browse/LPS-37869 "LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name").
 
 
 ## Supported Products
 
-* Liferay Portal 6.1 EE GA2 (6.1.20+)
+* Liferay Portal 6.2 CE GA6 (6.2.0+)
 
 
 ## Usage
@@ -30,7 +27,6 @@ Add/update the following properties in file "LIFERAY_HOME/portal-ext.properties"
 | verify.frequency | Data verification frequency. | Verify Suite | 1 (run once) |
 | verify.dl.file.name.normalization.enabled                | Enable DL file name normalization during Verify Document Library process. | Verify Document Library | true |
 | verify.dl.file.name.normalization.max.list.page.size     | DL file items to normalize in logical "page" of files. | Verify Document Library | 50 |
-| layout.import.dl.file.name.normalization.enabled | Enable DL file name normalization during LAR import for Document Library files. | Layout Import Document Library | true |
 
 
 ### Sample Portal Properties
@@ -45,8 +41,8 @@ Add/update the following properties in file "LIFERAY_HOME/portal-ext.properties"
     # com.liferay.portal.integrity.VerifyProcess. These classes will run on
     # startup to verify and fix any integrity problems found in the database.
     #
-    #verify.processes=com.liferay.portal.verify.VerifyProcessSuite
-    # see LPS-35280 / LPS-37869
+    # verify.processes=com.liferay.portal.verify.VerifyProcessSuite
+    # see LPS-35280
     verify.processes=au.com.permeance.liferay.portal.verify.CustomVerifyProcessSuite
 
     #
@@ -66,23 +62,21 @@ Add/update the following properties in file "LIFERAY_HOME/portal-ext.properties"
 ## Patches
 ##
 
-    # LPS-37869 - Verify Document Library
-    # https://issues.liferay.com/browse/LPS-37869
+    # LPS-35280 - Verify Document Library
+    # https://issues.liferay.com/browse/LPS-35280
     #verify.dl.file.name.normalization.enabled=false
     #verify.dl.file.name.normalization.max.list.page.size=50
-   
-    # LPS-37869 - Layout Import Document Library 
-    # https://issues.liferay.com/browse/LPS-37869  
-    #layout.import.dl.file.name.normalization.enabled=false
 ```
 
 ### Run Data Verify Process Suite
 
 The data Verify Process Suite will run when Liferay Portal starts according the value of property "verify.frequency". 
 
-* To always run data verification, set property "verify.frequency=1"
-* To never run data verification, set property "verify.frequency=0"
-* To run data verification once, set property "verify.frequency=-1"
+| *Property*        | *Value*  | *Description* |
+| :-------------  |:-------------| :----- |
+| verify.frequency | 1 | always run data verification |
+| verify.frequency | 0 | never run data verification |
+| verify.frequency | 1 | only run data verification once |
 
 See portal property configturation above.
 
@@ -91,16 +85,21 @@ See portal property configturation above.
 
 Step 1. Checkout source from GitHub project to a Liferay Portal Plugins SDK
 
-    % cd LIFERAY_PORTAL_PLUGINS_SDK/ext
+    % mkdir work
+    % cd work
     % git clone https://github.com/permeance/liferay-sample-verify-ext
+    $ cd liferay-sample-verify-ext
+    % git checkout 6.2.0.x
+    % git branch
+    6.2.0.x
 
 Step 2. Build and package
 
-    % ant clean war
+    % mvn -U clean package
 
-This will build "liferay-sample-verify-ext-A.B.C.D.war" in the Liferay Portal plugins SDK dist folder.
+This will build "liferay-sample-verify-ext-A.B.C.D.war" in the project target folder.
 
-NOTE: You will require JDK 1.6+ and Liferay Portal Plugins SDK.
+NOTE: You will require JDK 1.8+, Apache Maven 3.2.x and Liferay Maven SDK 6.2 CE GA6.
 
 
 ## Deployment
@@ -110,6 +109,7 @@ NOTE: You will require JDK 1.6+ and Liferay Portal Plugins SDK.
 * Deploy "liferay-sample-verify-ext-A.B.C.D.war" to "LIFERAY_HOME/deploy" folder.
 * Start Liferay Portal to install EXT plugin.
 * Stop Liferay Portal.
+* Redeploy all portal plugins (including liferay-sample-verify-ext)
 * Start Liferay Portal again to use EXT plugin.
 
 
@@ -122,11 +122,6 @@ NOTE: You will require JDK 1.6+ and Liferay Portal Plugins SDK.
 
 ### Data Verification
 
-* [Liferay Portal 6.1 - User Guide - Verify](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/verify "Liferay Portal 6.1 - User Guide - Verify")
+* Liferay Portal 6.2 - User Guide - Verify (TBC)
+* [GitHub Liferay Portal 6.2 - VerifyProcessSuite](https://github.com/liferay/liferay-portal/blob/6.2.x/portal-impl/src/com/liferay/portal/verify/VerifyProcessSuite.java)
 * [LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process](https://issues.liferay.com/browse/LPS-35280 "LPS-35280 - Upgrade Process 6.0 EE SP2 (6.0.12) to 6.1 EE GA2 (6.1.20) fails during Verify Document Library Process").
-
-
-### Layout Export/Import
-
-* [Liferay Portal 6.1 - User Guide - Creating sites and managing pages](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/managing-pages-in-liferay-portal "Liferay Portal 6.1 - User Guide - Creating sites and managing pages")
-* [LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name](https://issues.liferay.com/browse/LPS-37869 "LPS-37869 - Filename Exception when Importing LAR file with puncutation characters in document file name").
